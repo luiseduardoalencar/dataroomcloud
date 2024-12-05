@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% block title %}Registrar{% endblock %}
+{% block content %}
+<div class="register-wrapper">
+    <div class="register-container">
+        <h2 class="text-center">Cadastro</h2>
+        {% if error %}
+            <div class="alert alert-danger">
+                {{ error }}
+            </div>
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="username">Nome de Usuário</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="name">Nome Completo</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="password1">Senha</label>
+                    <input type="password" class="form-control" id="password1" name="password1" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="password2">Confirmar Senha</label>
+                    <input type="password" class="form-control" id="password2" name="password2" required>
+                </div>
+            </div>
+            <div class="form-row align-items-center">
+                <div class="form-group form-check-inline col-md-6">
+                    <input type="checkbox" class="form-check-input" id="terms" required>
+                    <label class="form-check-label" for="terms">
+                        Concordo com os <a href="#" data-toggle="modal" data-target="#termsModal">termos de aceite</a>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-register" id="register-btn" disabled>Cadastrar</button>
+            </div>
+        </form>
+        <div class="login-link">
+            Já possui uma conta? <a href="{% url 'login' %}">Login</a>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="termsModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="termsModalLabel">Termos de Aceite</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Insira aqui os termos de aceite e confidencialidade.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .register-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: calc(100vh - 56px);
+        padding: 15px;
+    }
+    .register-container {
+        max-width: 600px;
+        width: 100%;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background-color: #fff;
+    }
+    .register-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .btn-register {
+        width: 100%;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const termsCheckbox = document.getElementById('terms');
+        const registerButton = document.getElementById('register-btn');
+
+        termsCheckbox.addEventListener('change', function() {
+            registerButton.disabled = !this.checked;
+        });
+    });
+</script>
+{% endblock %}

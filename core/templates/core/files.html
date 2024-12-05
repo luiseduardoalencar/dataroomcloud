@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Arquivos{% endblock %}
+{% block content %}
+<div class="mt-4">
+    <h2>Arquivos em {{ subdiretorio.nome }}</h2>
+    <ul class="list-group">
+        {% for arquivo in arquivos %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <a href="{% url 'file_details' arquivo.id %}">
+                    <strong>{{ arquivo.titulo }}</strong> - {{ arquivo.descricao }}
+                </div>
+                <a href="{{ arquivo.arquivo.url }}" target="_blank" class="btn btn-primary btn-sm">Abrir</a>
+            </li>
+        {% empty %}
+            <li class="list-group-item">Nenhum arquivo disponível.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'subdirectories' subdiretorio.diretorio.id %}" class="btn btn-secondary mt-3">Voltar para Subdiretórios</a>
+</div>
+{% endblock %}

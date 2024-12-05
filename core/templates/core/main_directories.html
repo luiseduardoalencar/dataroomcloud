@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Diretórios{% endblock %}
+{% block content %}
+<div class="mt-4">
+    <h2>Diretórios</h2>
+    <ul class="list-group">
+        {% for diretorio in diretorios %}
+            <li class="list-group-item">
+                <a href="{% url 'subdirectories' diretorio.id %}">{{ diretorio.nome }}</a>
+            </li>
+        {% empty %}
+            <li class="list-group-item">Nenhum diretório disponível.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

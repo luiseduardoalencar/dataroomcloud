@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Subdiretórios{% endblock %}
+{% block content %}
+<div class="mt-4">
+    <h2>Subdiretórios de {{ diretorio.nome }}</h2>
+    <ul class="list-group">
+        {% for subdiretorio in subdiretorios %}
+            <li class="list-group-item">
+                <a href="{% url 'files' subdiretorio.id %}">{{ subdiretorio.nome }}</a>
+            </li>
+        {% empty %}
+            <li class="list-group-item">Nenhum subdiretório disponível.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'main_directories' %}" class="btn btn-secondary mt-3">Voltar para Diretórios</a>
+</div>
+{% endblock %}

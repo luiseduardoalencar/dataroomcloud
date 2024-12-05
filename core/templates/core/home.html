@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="mt-4">
+    <h2>Bem-vindo ao Dataroom Cloud</h2>
+    <p>Veja abaixo os diretórios disponíveis:</p>
+    <ul class="list-group">
+        {% for diretorio in diretorios %}
+            <li class="list-group-item">
+                <a href="{% url 'subdirectories' diretorio.id %}">{{ diretorio.nome }}</a>
+            </li>
+        {% empty %}
+            <li class="list-group-item">Nenhum diretório disponível no momento.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

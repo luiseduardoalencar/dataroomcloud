@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "dataroomcloud"
+version = "0.1.0"
+description = "Projeto de um dataroom virtual com seu funcionamento todo em cloud"
+authors = ["Luis Eduardo <luiseduardoalencarmelo@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "^5.1.3"
+psycopg2 = "^2.9.10"
+psycopg2-binary = "^2.9.10"
+boto3 = "^1.35.72"
+django-storages = {extras = ["s3"], version = "^1.14.4"}
+python-slugify = "^8.0.4"
+whitenoise = "^6.8.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

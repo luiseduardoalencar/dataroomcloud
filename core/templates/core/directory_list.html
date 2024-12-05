@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Diretórios{% endblock %}
+{% block content %}
+<div class="mt-4">
+    <h2>Diretórios</h2>
+    {% for diretorio in diretorios %}
+        <div class="card mb-3">
+            <div class="card-header">
+                {{ diretorio.nome }}
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ diretorio.descricao }}</p>
+                {% if diretorio.subdiretorios.all %}
+                    {% for subdiretorio in diretorio.subdiretorios.all %}
+                        <div class="card mb-2 ml-4">
+                            <div class="card-header">
+                                {{ subdiretorio.nome }}
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">{{ subdiretorio.descricao }}</p>
+                                {% if subdiretorio.arquivos.all %}
+                                    <ul class="list-group">
+                                        {% for arquivo in subdiretorio.arquivos.all %}
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <strong>{{ arquivo.titulo }}</strong> - {{ arquivo.descricao }}
+                                                </div>
+                                                <a href="{{ arquivo.arquivo.url }}" target="_blank" class="btn btn-primary btn-sm">Abrir</a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% else %}
+                                    <p>Sem arquivos neste subdiretório.</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>Sem subdiretórios neste diretório.</p>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
